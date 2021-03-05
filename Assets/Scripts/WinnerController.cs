@@ -120,7 +120,7 @@ public class WinnerController : MonoBehaviourPunCallbacks
     [PunRPC]
     void activateHat()
     {
-        hatProba.SetActive(true);
+        //hatProba.SetActive(true);
     }
 
 

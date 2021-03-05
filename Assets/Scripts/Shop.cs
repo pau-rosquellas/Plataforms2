@@ -16,7 +16,9 @@ public class Shop : MonoBehaviour
     public void Start()
     {
 
+      //Posar 100 monedes de proba
       PlayerPrefs.SetInt("Money", 100);
+
       money = PlayerPrefs.GetInt("Money", 0);
       moneyText.text = money.ToString();
       loadItemFile();
@@ -55,4 +57,8 @@ public class Shop : MonoBehaviour
         }
     }
 
+    public List<int> getIdShop()
+    {
+        return idShop;
+    }
 }

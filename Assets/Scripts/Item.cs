@@ -16,19 +16,13 @@ public class Item : MonoBehaviour
     {
         costT.text = cost.ToString();
         itemnameT.text = itemname.ToString();
+        
 
-        foreach (int i in GetComponentInParent<Shop>().idShop)
-        {
-            Debug.Log(i);
-        }
-
-        /*if (this.id == 1)
+        if (id == 3)
         {
             button.interactable = false;
         }
-        */
         
-
 
     }
 
