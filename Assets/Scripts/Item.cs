@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
+using System.IO;
+
 
 public class Item : MonoBehaviour
 {
@@ -11,18 +15,23 @@ public class Item : MonoBehaviour
     public Text costT;
     public Text itemnameT;
     public Button button;
-
+    public List<int> idS = new List<int>();
     private void Start()
     {
+        loadItemFile();
         costT.text = cost.ToString();
         itemnameT.text = itemname.ToString();
-        
-
-        if (id == 3)
+       
+        foreach (int i in idS)
         {
-            button.interactable = false;
+            Debug.Log(i);
+            if (i == this.id)
+            {
+                Debug.Log("IGUAL");
+                button.interactable = false;
+            }
         }
-        
+
 
     }
 
@@ -36,4 +45,16 @@ public class Item : MonoBehaviour
         }
 
     }
+
+    void loadItemFile()
+    {
+        using (Stream stream = File.Open("save.dat", FileMode.Open))
+        {
+            var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+            idS = (List<int>)bformatter.Deserialize(stream);
+        }
+    }
+
+
 }

@@ -11,7 +11,8 @@ public class Shop : MonoBehaviour
     public int money = 0;
     public Text moneyText;
 
-    public List<int> idShop = new List<int>();
+    public List<int> idShop;
+    
 
     public void Start()
     {
@@ -25,7 +26,8 @@ public class Shop : MonoBehaviour
 
         foreach (int i in idShop)
        {
-             Debug.Log(i);
+            //Debug.Log(i);
+           // GetComponentInParent<Item>().getShop().Add(i);
         }
        
 

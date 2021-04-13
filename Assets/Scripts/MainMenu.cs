@@ -28,7 +28,10 @@ public class MainMenu : MonoBehaviourPunCallbacks
     private void Awake() 
     {
       PhotonNetwork.AutomaticallySyncScene = true;
+      Debug.Log(PlayerPrefs.GetInt("skinChoosen"));
     }
+
+
 
     public void FindOpponent()
     {
@@ -126,6 +129,11 @@ public class MainMenu : MonoBehaviourPunCallbacks
     public void shopScene()
     {
         SceneManager.LoadScene("Shop");
+    }
+
+    public void skinSelector()
+    {
+        SceneManager.LoadScene("SelectSkin");
     }
 
 

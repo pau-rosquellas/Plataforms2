@@ -7,7 +7,7 @@ using System.Threading;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class WinnerController : MonoBehaviourPunCallbacks
+public class WinnerController : MonoBehaviourPun
 {
     
     public GameObject canvWinner;
@@ -15,7 +15,14 @@ public class WinnerController : MonoBehaviourPunCallbacks
     public GameObject canvRip;
 
     public PhotonView pv;
+
+    //Hats
     public GameObject hatProba;
+     public GameObject hatSanta;
+     public GameObject hatCowboy;
+     public GameObject hatWizard;
+     public GameObject hatPatrick;
+
 
     public Text copesWin;
     public Text copesLose;
@@ -25,11 +32,30 @@ public class WinnerController : MonoBehaviourPunCallbacks
     public static int trophys;
     public static int trophysTotal;
 
+    private int skin;
+
+    void Awake()
+    {
+        skin = PlayerPrefs.GetInt("skinChoosen", 1);
+
+
+        //Sistema skins
+        if (photonView.IsMine)
+        {
+            GetComponent<PhotonView>().RPC("activateHat", RpcTarget.AllBuffered, skin);
+        }
+        else
+        {
+            return;
+        }
+    }
+
     void Start()
     {
         trophys = 0;
         trophysTotal = 0;
         updateMoney();
+     
     }
 
     void OnCollisionEnter2D(Collision2D obj) {
@@ -37,16 +63,11 @@ public class WinnerController : MonoBehaviourPunCallbacks
         
         if (obj.collider.tag == "rip")
         {
-
-
             if (photonView.IsMine)
             {
                 StartCoroutine(activateRip());
-
             }
             
-
-
         }
 
         /*
@@ -74,9 +95,8 @@ public class WinnerController : MonoBehaviourPunCallbacks
 
             if (photonView.IsMine)
             {
-                pv.RPC("activateHat", RpcTarget.AllBufferedViaServer);
+                //pv.RPC("activateHat", RpcTarget.AllBufferedViaServer);
                 
-
                 PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") + 1);
                 updateMoney();
                 Destroy(collision.gameObject);
@@ -118,17 +138,34 @@ public class WinnerController : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    void activateHat()
+    private void activateHat(int skin)
     {
-        //hatProba.SetActive(true);
+               
+            switch (skin)
+            {
+                case 2:
+                    hatSanta.SetActive(true);
+                    break;
+                case 3:
+                    hatCowboy.SetActive(true);
+                    break;
+                case 4:
+                    hatWizard.SetActive(true);
+                    break;
+                case 5:
+                    hatPatrick.SetActive(true);
+                    break;
+            }
+        
+        
     }
 
 
     private IEnumerator waitDisconnect()
     {
     
-    yield return new WaitForSeconds (6);
-    DisconnectPlayer();
+        yield return new WaitForSeconds (6);
+        DisconnectPlayer();
     
     }
 
@@ -166,8 +203,6 @@ public class WinnerController : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(1.5f);
         transform.position = new Vector2(-14, 0);
         canvRip.SetActive(false);
-
-
     }
 
     public static int GetTrophys()
