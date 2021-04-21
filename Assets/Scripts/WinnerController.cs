@@ -38,7 +38,6 @@ public class WinnerController : MonoBehaviourPun
     {
         skin = PlayerPrefs.GetInt("skinChoosen", 1);
 
-
         //Sistema skins
         if (photonView.IsMine)
         {
@@ -80,7 +79,6 @@ public class WinnerController : MonoBehaviourPun
                 coins.destroyCoin();
                 
             }
-
 
         }
         */

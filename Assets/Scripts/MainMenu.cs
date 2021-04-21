@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] private TextMeshProUGUI waitingStatusText = null;
     
 
-    //public static int proba;
+    
     public string[] maps = { "SampleScene", "Level2" };
 
     private bool isConnecting = false;
@@ -136,6 +136,6 @@ public class MainMenu : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("SelectSkin");
     }
 
-
+   
 
 }
