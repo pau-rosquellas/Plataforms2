@@ -37,6 +37,7 @@ public class SkinSelection : MonoBehaviour
 
         choose = Int32.Parse(transform.GetChild(index).gameObject.name);
 
+        
         if (idShop.Contains(Int32.Parse(transform.GetChild(index).gameObject.name))) 
         {
             Debug.Log("Comprada");
@@ -45,9 +46,16 @@ public class SkinSelection : MonoBehaviour
         }
         else
         {
+            
             Debug.Log("NO Comprada");
             chooseButton.image.sprite = btnBlock;
             chooseButton.interactable = false;
+
+            if (Int32.Parse(transform.GetChild(index).gameObject.name) == 1)
+            {
+                chooseButton.interactable = true;
+                chooseButton.image.sprite = btnFree;
+            }
         }
 
         for (int i = 0; i < transform.childCount; i++)
@@ -65,7 +73,7 @@ public class SkinSelection : MonoBehaviour
 
     void loadItemFile()
     {
-        using (Stream stream = File.Open("save.dat", FileMode.Open))
+        using (Stream stream = File.Open("save5.dat", FileMode.Open))
         {
             var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 

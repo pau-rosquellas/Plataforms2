@@ -2958,7 +2958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d111f43b2b553964cb19f39eac78f0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 11
+  id: 5
   cost: 10
   itemname: XMAS HAT
   costT: {fileID: 458734937}

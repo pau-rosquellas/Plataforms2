@@ -68,21 +68,6 @@ public class WinnerController : MonoBehaviourPun
             }
             
         }
-
-        /*
-        if (obj.collider.tag == "coin")
-        {
-            if (photonView.IsMine)
-            {
-                PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money", 0) + 1);
-                updateMoney();
-                coins.destroyCoin();
-                
-            }
-
-        }
-        */
-
     }
 
     
@@ -92,9 +77,7 @@ public class WinnerController : MonoBehaviourPun
         {
 
             if (photonView.IsMine)
-            {
-                //pv.RPC("activateHat", RpcTarget.AllBufferedViaServer);
-                
+            {               
                 PlayerPrefs.SetInt("Money", PlayerPrefs.GetInt("Money") + 1);
                 updateMoney();
                 Destroy(collision.gameObject);
@@ -122,7 +105,15 @@ public class WinnerController : MonoBehaviourPun
                 trophys = Random.Range(10, 20);
                 copesLose.text = "-" + trophys;
                 trophysTotal = PlayerPrefs.GetInt("TrophysTotal") - trophys;
-                PlayerPrefs.SetInt("TrophysTotal", trophysTotal);
+
+                if (trophysTotal <= 0)
+                {
+                   PlayerPrefs.SetInt("TrophysTotal", 0);
+
+                } else
+                {
+                   PlayerPrefs.SetInt("TrophysTotal", trophysTotal);
+                }
 
                 canvLoser.SetActive(true);
                 StartCoroutine(loserMethod());
@@ -137,8 +128,7 @@ public class WinnerController : MonoBehaviourPun
 
     [PunRPC]
     private void activateHat(int skin)
-    {
-               
+    {      
             switch (skin)
             {
                 case 2:
@@ -153,9 +143,7 @@ public class WinnerController : MonoBehaviourPun
                 case 5:
                     hatPatrick.SetActive(true);
                     break;
-            }
-        
-        
+            }       
     }
 
 

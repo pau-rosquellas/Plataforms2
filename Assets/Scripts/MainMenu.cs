@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
     
 
     
-    public string[] maps = { "SampleScene", "Level2" };
+    public static string[] maps = { "SampleScene", "Level2", "Level3"};
 
     private bool isConnecting = false;
 
@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
     {
       PhotonNetwork.AutomaticallySyncScene = true;
       Debug.Log(PlayerPrefs.GetInt("skinChoosen"));
+      
     }
 
 
@@ -105,7 +106,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
 
             waitingStatusText.text = "Opponent Found";
             Debug.Log("Match is ready to begin");
-            //proba = 1;
+            
             PhotonNetwork.LoadLevel(randomMap());
             
         }
@@ -117,8 +118,9 @@ public class MainMenu : MonoBehaviourPunCallbacks
     }
 
     public String randomMap(){
-        int num = Random.Range(0, 2);
-        return maps[0];
+        int num = Random.Range(0, 3);
+        
+        return maps[2];
     }
 
     public override void OnLeftRoom()

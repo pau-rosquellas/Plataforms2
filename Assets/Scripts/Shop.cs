@@ -12,25 +12,12 @@ public class Shop : MonoBehaviour
     public Text moneyText;
 
     public List<int> idShop;
-    
 
     public void Start()
     {
-
-      //Posar 100 monedes de proba
-      PlayerPrefs.SetInt("Money", 100);
-
       money = PlayerPrefs.GetInt("Money", 0);
       moneyText.text = money.ToString();
       loadItemFile();
-
-        foreach (int i in idShop)
-       {
-            //Debug.Log(i);
-           // GetComponentInParent<Item>().getShop().Add(i);
-        }
-       
-
     }
 
     
@@ -43,7 +30,7 @@ public class Shop : MonoBehaviour
 
     void saveItemFile()
     {
-        FileStream fs = new FileStream("save.dat", FileMode.Create);
+        FileStream fs = new FileStream("save5.dat", FileMode.Create);
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(fs, idShop);
         fs.Close();
@@ -51,7 +38,8 @@ public class Shop : MonoBehaviour
 
     void loadItemFile()
     {
-        using (Stream stream = File.Open("save.dat", FileMode.Open))
+        
+        using (Stream stream = File.Open("save5.dat", FileMode.Open))
         {
             var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
@@ -63,4 +51,19 @@ public class Shop : MonoBehaviour
     {
         return idShop;
     }
+
+    public void resetList()
+    {
+        foreach (int i in idShop)
+        {
+            idShop.RemoveAt(i);
+        }
+
+        FileStream fs = new FileStream("save5.dat", FileMode.Create);
+        BinaryFormatter bf = new BinaryFormatter();
+        bf.Serialize(fs, idShop);
+        fs.Close();
+    }
+
+    
 }

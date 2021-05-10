@@ -27,7 +27,6 @@ public class Item : MonoBehaviour
             Debug.Log(i);
             if (i == this.id)
             {
-                Debug.Log("IGUAL");
                 button.interactable = false;
             }
         }
@@ -48,7 +47,7 @@ public class Item : MonoBehaviour
 
     void loadItemFile()
     {
-        using (Stream stream = File.Open("save.dat", FileMode.Open))
+        using (Stream stream = File.Open("save5.dat", FileMode.Open))
         {
             var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
